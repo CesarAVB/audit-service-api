@@ -1,13 +1,18 @@
 package br.com.sistema.audit.model;
 
+import java.time.LocalDateTime;
+
+import br.com.sistema.audit.config.JsonStringConverter;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "audit_events")
@@ -37,7 +42,8 @@ public class AuditEvent {
     @Schema(description = "Endereço IP de origem da requisição.", example = "192.168.1.100")
     private String ipAddress;
 
-    @Column(columnDefinition = "jsonb") // Define o tipo de coluna como JSONB no PostgreSQL
+    @Column(columnDefinition = "jsonb") // Informa ao Hibernate que a coluna é JSONB
+    @Convert(converter = JsonStringConverter.class) // Usa um conversor customizado para String
     @Schema(description = "Detalhes adicionais do evento em formato JSON.", example = "{\"username\":\"novo_usuario\", \"email\":\"novo@email.com\"}")
     private String details;
 }
