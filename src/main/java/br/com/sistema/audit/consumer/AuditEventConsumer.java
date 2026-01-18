@@ -4,7 +4,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import br.com.sistema.audit.model.AuditEvent;
 import br.com.sistema.audit.model.AuditEventMessage;
 import br.com.sistema.audit.repositories.AuditEventRepository;
@@ -23,16 +22,7 @@ public class AuditEventConsumer {
     public AuditEventConsumer(AuditEventRepository auditEventRepository, ObjectMapper objectMapper) {
         this.auditEventRepository = auditEventRepository;
         this.objectMapper = objectMapper;
-        if (!objectMapper.getRegisteredModuleIds().contains(JavaTimeModule.class.getName())) {
-             objectMapper.registerModule(new JavaTimeModule());
-        }
-    }
-
-    public AuditEventConsumer(AuditEventRepository auditEventRepository) {
-        this.auditEventRepository = auditEventRepository;
-        this.objectMapper = new ObjectMapper();
-        this.objectMapper.registerModule(new JavaTimeModule());
-    }
+   }
 
     @RabbitListener(queues = "${audit.queue.name:audit_events_queue}")
     public void receiveAuditEvent(String jsonEvent) {
