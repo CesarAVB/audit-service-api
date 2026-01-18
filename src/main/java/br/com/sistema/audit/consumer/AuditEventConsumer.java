@@ -14,12 +14,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
-@RequiredArgsConstructor // Gera construtor para injeção de dependências finais
-@Slf4j // Adiciona um logger via Lombok
+@RequiredArgsConstructor
+@Slf4j
 public class AuditEventConsumer {
 
     private final AuditEventRepository auditEventRepository;
-    private final ObjectMapper objectMapper; // Injetado para desserialização
+    private final ObjectMapper objectMapper;
 
     // Construtor customizado para configurar o ObjectMapper
     public AuditEventConsumer(AuditEventRepository auditEventRepository) {
