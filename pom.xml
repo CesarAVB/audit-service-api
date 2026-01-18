@@ -82,6 +82,13 @@
 			<optional>true</optional>
 		</dependency>
 		
+		<!-- HIBERNATE TYPES - Extensões para o Hibernate, incluindo suporte a tipos JSON do PostgreSQL -->
+		<dependency>
+	        <groupId>com.vladmihalcea</groupId>
+	        <artifactId>hibernate-types-60</artifactId> <!-- Para Hibernate 6.x (usado pelo Spring Boot 3) -->
+	        <version>2.21.1</version> <!-- Use esta versão ou verifique a mais recente compatível -->
+	    </dependency>
+		
 		<!-- TESTES - Starter com bibliotecas para facilitar a criação de testes unitários e de integração -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
